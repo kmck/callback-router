@@ -1,0 +1,15 @@
+{
+  "name": "react-use-callback-router",
+  "version": "0.1.0",
+  "main": "dist/index.js",
+  "dependencies": {
+    "callback-router": "0.1.0"
+  },
+  "devDependencies": {
+    "@types/react": "16.9.2",
+    "react": "^16.9.0"
+  },
+  "peerDependencies": {
+    "react": ">=16.8.0"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "name": "callback-router",
+  "version": "0.1.0",
+  "main": "dist/index.js",
+  "dependencies": {
+    "path-to-regexp": "^3.1.0"
+  }
+}
