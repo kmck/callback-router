@@ -13,8 +13,33 @@ const PACKAGES_PATH = path.join(__dirname, PACKAGES_DIRECTORY);
 const configs = [];
 
 // Building all packages in the monorepo
-// Note: Build order is not important because interdependencies do not need to be resolved
 const pkgNames = fs.readdirSync(path.join(__dirname, PACKAGES_DIRECTORY));
+const REGEX_REACT_HOOK_PKG = /^(react-)?use-/i;
+pkgNames.sort((pkgNameA, pkgNameB) => {
+  // Build callback-router first
+  if (pkgNameA === 'callback-router') {
+    return -1;
+  } else if (pkgNameB === 'callback-router') {
+    return 1;
+  }
+  // Build examples last
+  if (pkgNameA === 'examples') {
+    return 1;
+  } else if (pkgNameB === 'examples') {
+    return -1;
+  }
+  // Build React Hooks packages last
+  const isReactHookA = REGEX_REACT_HOOK_PKG.test(pkgNameA);
+  const isReactHookB = REGEX_REACT_HOOK_PKG.test(pkgNameB);
+  if (!isReactHookA && isReactHookB) {
+    return -1;
+  }
+  if (isReactHookA && !isReactHookB) {
+    return 1;
+  }
+  return 0;
+});
+
 pkgNames.forEach((pkgName) => {
   const pkgPath = path.join(PACKAGES_DIRECTORY, pkgName);
   /* eslint-disable global-require, import/no-dynamic-require */
