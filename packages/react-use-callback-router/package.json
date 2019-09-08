@@ -1,9 +1,25 @@
 {
   "name": "react-use-callback-router",
-  "version": "0.1.0",
+  "version": "0.1.1",
+  "description": "Reavt hooks for callback-based routing",
   "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "keywords": [
+    "callback",
+    "router",
+    "route",
+    "routing",
+    "history",
+    "react",
+    "use",
+    "hooks"
+  ],
+  "author": "Keith McKnight <keith@mcknig.ht>",
+  "repository": "github:kmck/callback-router",
+  "homepage": "https://github.com/kmck/callback-router/tree/master/packages/react-use-callback-router",
+  "license": "ISC",
   "dependencies": {
-    "callback-router": "0.1.0"
+    "callback-router": "0.1.1"
   },
   "devDependencies": {
     "@types/react": "16.9.2",

@@ -4,6 +4,7 @@
   ],
   "private": true,
   "scripts": {
+    "clean": "rm -rf packages/callback-router/dist && rm -rf packages/redux-callback-router/dist && rm -rf packages/react-use-callback-router/dist && rm -rf packages/react-use-redux-callback-router/dist",
     "start": "rollup -c -w",
     "build": "rollup -c",
     "test": "jest"
