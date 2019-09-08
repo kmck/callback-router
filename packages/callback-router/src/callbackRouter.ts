@@ -1,4 +1,6 @@
 import {
+  EvaluateRoutes,
+  NavigateOptions,
   ProcessedRouteMapEntry,
   Route,
   RouteChangeType,
@@ -57,7 +59,7 @@ export function navigate(path: string, {
   replaceState = false,
   state = {},
   title = document.title,
-} = {}) {
+}: NavigateOptions = {}) {
   let type: RouteChangeType;
   if (replaceState) {
     type = force ? ROUTE_CHANGE_FORCE_REPLACE_STATE : ROUTE_CHANGE_REPLACE_STATE;
@@ -108,6 +110,6 @@ export function registerRoutes(
 
   return {
     unregisterRoutes,
-    evaluate: evaluateRoutes,
+    evaluate: evaluateRoutes as EvaluateRoutes,
   };
 }

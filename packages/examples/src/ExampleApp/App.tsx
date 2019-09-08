@@ -3,6 +3,8 @@ import React, {
   useMemo,
 } from 'react';
 
+import { navigate } from 'callback-router';
+
 import {
   RouteCallback,
   useCallbackRouter,
@@ -39,7 +41,7 @@ const App: React.FC<AppProps> = ({
       callback: defaultCallback,
     },
   }), []);
-  const [result, navigate, evaluate] = useCallbackRouter(routes, true);
+  const [result, _evaluate] = useCallbackRouter(routes, true);
 
   const handleNavigateOneClick = useCallback((e: React.MouseEvent) => {
     navigate('/one', { replaceState: e.altKey, force: e.shiftKey });

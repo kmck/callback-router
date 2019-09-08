@@ -53,3 +53,12 @@ export type RouteMatcher = (pathname: string) => null | RouteMatch;
 export type Route = [string, RouteMatcher, boolean, boolean];
 
 export type ProcessedRouteMapEntry = [Route[], (result: any) => void];
+
+export type EvaluateRoutes = (pathname: string, state: any, type: RouteChangeType) => any;
+
+export type NavigateOptions = {
+  force?: boolean,
+  replaceState?: boolean,
+  state?: any,
+  title?: string,
+};

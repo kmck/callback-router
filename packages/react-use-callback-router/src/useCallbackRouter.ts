@@ -6,19 +6,25 @@ import {
 } from 'react';
 
 import {
+  EvaluateRoutes,
   RouteMap,
   ROUTE_CHANGE_INITIALIZE,
-  evaluate,
   registerRoutes,
-  navigate,
 } from 'callback-router';
 
 export default function useCallbackRouter(
   routes: RouteMap,
   initialize = true,
-): [any, typeof navigate, typeof evaluate] {
+): [any, EvaluateRoutes] {
   const isInitializedRef = useRef(!initialize);
   const [result, setResult] = useState<any>(null);
+  const evaluateLocalRef = useRef<EvaluateRoutes>();
+
+  const evaluate = useCallback<EvaluateRoutes>((...args) => {
+    if (evaluateLocalRef.current) {
+      return evaluateLocalRef.current(...args);
+    }
+  }, []);
 
   const handleEvaluateRoute = useCallback((evaluateResult) => {
     setResult(evaluateResult);
@@ -31,14 +37,15 @@ export default function useCallbackRouter(
       evaluate: evaluateLocal,
     } = registerRoutes(routes, handleEvaluateRoute);
 
+    evaluateLocalRef.current = evaluateLocal;
+
     if (!isInitializedRef.current) {
       isInitializedRef.current = true;
-      const evaluateResult = evaluateLocal(
+      evaluate(
         document.location.pathname,
         window.history.state,
         ROUTE_CHANGE_INITIALIZE,
       );
-      setResult(evaluateResult);
     }
 
     return () => {
@@ -46,5 +53,5 @@ export default function useCallbackRouter(
     };
   }, [routes, handleEvaluateRoute]);
 
-  return [result, navigate, evaluate];
+  return [result, evaluate];
 }

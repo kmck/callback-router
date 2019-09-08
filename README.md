@@ -2,50 +2,50 @@
 
 Are you reluctantly adding routing to your web app? Say no more!
 
-This library is a tiny hook into the history API that lets you register routes with callbacks and
-do whatever you want from there. This is useful for cases where you don't want `window.location`
-to run the show, but URLs still matter for one reason or another.
+Most routers map a URL to some UI. **Callback Router** is a little different;
+instead of mapping URLs directly to the components that render the page, this
+library is a tiny hook into the history API that lets you map URLs to callback
+functions that can do pretty much whatever you want!
 
-For example, maybe you're using a central application state to handle navigation already, but you
-would like pages to be bookmarkable or shareable. Maybe there is some nuance to the navigation
-state that simply cannot be captured in a single string of text.
+Perhaps you need to maintain a meaningful URL for one reason or another, but you
+don't want `window.location` totally running the show in your Single-Page App.
+Using Callback Router allows you to keep the URL as far away from application
+state as you like.
 
-## Installation
 
-```bash
-npm install callback-router
-```
+## Libraries
 
-```bash
-yarn add callback-router
-```
+This whole thing exists because I didn't like having the full app state split
+across the URL and the store when using React Router and Redux together.
+In the interest of modularity, this repository is split up into four libraries,
+so you can use the parts you need!
 
-## Usage
+### [callback-router]
 
-```js
-// @TODO
-```
+Core implementation that allows you to map routes to callbacks and integrate
+with the browser history API.
 
-### Routing
+### [react-use-callback-router]
 
-A basic route maps a `path` to a `callback`. The pathname is processed on router initialization and
-on `popstate` events. When a route is matched, its `callback` is invoked.
+React hook interface for Callback Router.
 
-The pathname is _not_ necessarily processed for imperative history changes, such as when using
-`history.pushState()` and `history.replaceState()`, but you can enable that behavior per route by
-enabling the `navigate` property.
+### [redux-callback-router]
 
-Routes are evaluated in order of most- to least-specific, regardless of the registration order.
-You can prevent this behavior in a few ways, if necessary. Defining a route as `exact` will
-require an exact path match. Defining a route as `last` will interrupt evaluation if the route
-matches, regardless if other less-specific routes also match.
+This is the Redux flavor of Callback Router, which allows you to keep the URL
+synchronized with your Redux state In addition to generic callbacks, you can map
+routes to action creators so that navigation will dispatch an action.
 
-Enabling `strict` on a route will make the path matcher to be picky about trailing slashes.
+### [react-use-redux-callback-router]
 
-## API
+React hook interface for Redux Callback Router.
 
-#### `evaluate`
 
-#### `navigate`
+## License
 
-#### `registerRoutes`
+ISC © [Keith McKnight](https://github.com/kmck)
+
+
+[callback-router]: /packages/callback-router
+[react-use-callback-router]: /packages/react-use-callback-router
+[redux-callback-router]: /packages/redux-callback-router
+[react-use-redux-callback-router]: /packages/react-use-redux-callback-router

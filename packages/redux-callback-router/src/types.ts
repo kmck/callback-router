@@ -4,6 +4,8 @@ import {
 } from 'redux';
 
 import {
+  EvaluateRoutes,
+  NavigateOptions,
   RouteChangeType,
   RoutePathParams,
 } from 'callback-router';
@@ -45,9 +47,17 @@ export type DispatchRouteMap<S, A extends Action<any>> = {
   [path: string]: A | DispatchRouteActionCreator<S, A> | DispatchRouteDefinition<S, A>,
 };
 
-export type MapStateToPath<S, A extends Action<any>> = (state: S, action: A, prevState?: S) => (string | undefined);
+export type NavigatePathTuple = [string, NavigateOptions?];
+
+export type MapStateToPath<S, A extends Action<any>> = (
+  state: S,
+  action: A,
+  prevState?: S,
+) => NavigatePathTuple | string | null | undefined;
 
 export {
+  EvaluateRoutes,
+  NavigateOptions,
   RouteChangeType,
   RoutePathParams,
 };

@@ -1,13 +1,22 @@
 import { createStore } from 'redux';
 
-import { createCallbackRouterReducer } from 'redux-callback-router';
+import {
+  NavigatePathTuple,
+  createCallbackRouterReducer,
+} from 'redux-callback-router';
 
 import { AppActionTypes } from './actions';
 import { AppState, reducer } from './reducer';
 
-function mapStateToPath(state: AppState, action: AppActionTypes) {
+function mapStateToPath(
+  state: AppState,
+  action: AppActionTypes,
+): NavigatePathTuple | undefined {
   if (action.navigate) {
-    return `/${state.instrument}/${state.color}`;
+    return [`/${state.instrument}/${state.color}`, {
+      force: action.force,
+      replaceState: action.replaceState,
+    }];
   }
 }
 

@@ -25,7 +25,7 @@ export function registerRoutes<S, A extends Action<any> = AnyAction>(
   dispatch: Dispatch<A>,
   getState: () => S,
   callback?: (result: any) => void,
-  ) {
+) {
   const createCallback = (action: A | DispatchRouteActionCreator<S, A>) => (
     (params, type, pathname, state, path) =>
       dispatch(typeof action === 'function' ? action(params, type, pathname, state, path, getState) : action)
@@ -68,9 +68,14 @@ export function createCallbackRouterReducer<S, A extends Action<any> = AnyAction
   return function wrappedReducer(prevState, action) {
     const prevPath = window.location.pathname;
     const nextState = reducer(prevState, action);
-    const nextPath = mapStateToPath(nextState, action, prevState);
-    if ((navigateInitialState || prevState) && nextPath && nextPath !== prevPath) {
-      navigate(nextPath);
+    const pathResult = mapStateToPath(nextState, action, prevState);
+    if (pathResult) {
+      const [nextPath, options] = typeof pathResult === 'string'
+        ? [pathResult]
+        : pathResult;
+      if ((navigateInitialState || prevState) && nextPath && nextPath !== prevPath) {
+        navigate(nextPath, options);
+      }
     }
     return nextState;
   } as typeof reducer;

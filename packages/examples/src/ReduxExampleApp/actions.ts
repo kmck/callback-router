@@ -1,19 +1,23 @@
-export interface SetInstrumentAction {
+export interface BaseAction {
+  force?: boolean,
+  navigate?: boolean,
+  replaceState?: boolean,
+  type: string,
+};
+
+export interface SetInstrumentAction extends BaseAction {
   color: string,
   instrument: string,
-  navigate?: boolean,
   type: 'SET_INSTRUMENT',
 }
 
-export interface SetColorAction {
+export interface SetColorAction extends BaseAction {
   color: string,
-  navigate?: boolean,
   type: 'SET_COLOR',
 }
 
-export interface DoNothingAction {
+export interface DoNothingAction extends BaseAction {
   payload?: any,
-  navigate?: boolean,
   type: 'DO_NOTHING',
 }
 

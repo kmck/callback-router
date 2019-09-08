@@ -11,20 +11,26 @@ import {
 import { useStore } from 'react-redux';
 
 import {
+  EvaluateRoutes,
   DispatchRouteMap,
   ROUTE_CHANGE_INITIALIZE,
-  evaluate,
   registerRoutes,
-  navigate,
 } from 'redux-callback-router';
 
 export default function useCallbackRouter<S, A extends Action<any> = AnyAction>(
   routes: DispatchRouteMap<S, A>,
   initialize = true,
-): [any, typeof navigate, typeof evaluate] {
+): [any, EvaluateRoutes] {
   const store = useStore<S, A>();
   const initializedRef = useRef(!initialize);
   const [result, setResult] = useState<any>(null);
+  const evaluateLocalRef = useRef<EvaluateRoutes>();
+
+  const evaluate = useCallback<EvaluateRoutes>((...args) => {
+    if (evaluateLocalRef.current) {
+      return evaluateLocalRef.current(...args);
+    }
+  }, []);
 
   const handleEvaluateRoute = useCallback((evaluateResult) => {
     setResult(evaluateResult);
@@ -37,14 +43,15 @@ export default function useCallbackRouter<S, A extends Action<any> = AnyAction>(
       evaluate: evaluateLocal,
     } = registerRoutes(routes, store.dispatch, store.getState, handleEvaluateRoute);
 
+    evaluateLocalRef.current = evaluateLocal;
+
     if (!initializedRef.current) {
       initializedRef.current = true;
-      const evaluateResult = evaluateLocal(
+      evaluateLocal(
         document.location.pathname,
         window.history.state,
         ROUTE_CHANGE_INITIALIZE,
       );
-      setResult(evaluateResult);
     }
 
     return () => {
@@ -52,5 +59,5 @@ export default function useCallbackRouter<S, A extends Action<any> = AnyAction>(
     };
   }, [store.getState, store.dispatch, routes, handleEvaluateRoute]);
 
-  return [result, navigate, evaluate];
+  return [result, evaluate];
 }
