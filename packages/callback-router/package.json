@@ -4,5 +4,8 @@
   "main": "dist/index.js",
   "dependencies": {
     "path-to-regexp": "^3.1.0"
-  }
+  },
+  "files": [
+    "dist"
+  ]
 }

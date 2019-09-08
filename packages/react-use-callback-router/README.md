@@ -70,9 +70,13 @@ const YourComponent = () => {
 
 Returns `evaluate` from [Callback Router].
 
+---
+
 #### `useNavigate`
 
 Returns `navigate` from [Callback Router].
+
+---
 
 #### `useCallbackRouter`
 
@@ -83,7 +87,7 @@ Registers paths to their callbacks and returns the most recent result and the
 const [result, evaluate] = useCallbackRouter(routes, initialize);
 ```
 
-#### Arguments
+###### Arguments
 
 ##### `routes` (`Object`)
 
@@ -98,7 +102,7 @@ When set, the routes are evaluated on mount.
 
 Function invoked when the route is matched.
 
-#### Returns
+###### Returns
 
 ##### `result`
 

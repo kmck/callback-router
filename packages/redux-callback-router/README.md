@@ -90,6 +90,8 @@ unregisterRoutes();
 * [`navigate(path, options)`](#navigate)
 * [`createCallbackRouterReducer(reducer, mapStateToPath, navigateInitialState)`](#createCallbackRouterReducer)
 
+---
+
 ####  `registerRoutes`
 
 Registers paths to their callbacks.
@@ -152,6 +154,7 @@ vise-versa.
 
 Common callback invoked at the end of any matching route's callback.
 
+---
 
 #### `evaluate`
 
@@ -193,6 +196,7 @@ Navigation type used to differentiate between imperative navigation and browser 
 
 Map of paths to route definitions or callbacks.
 
+---
 
 #### `navigate`
 
@@ -234,6 +238,7 @@ Additional data associated with the state.
 
 Title of the history state.
 
+---
 
 ####  `createCallbackRouterReducer`
 

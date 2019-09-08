@@ -81,7 +81,7 @@ Registers paths to their callbacks and returns the most recent result and the
 const [result, evaluate] = useReduxCallbackRouter(routes, initialize);
 ```
 
-#### Arguments
+###### Arguments
 
 ##### `routes` (`Object`)
 
@@ -96,7 +96,7 @@ When set, the routes are evaluated on mount.
 
 Function invoked when the route is matched.
 
-#### Returns
+###### Returns
 
 ##### `result`
 

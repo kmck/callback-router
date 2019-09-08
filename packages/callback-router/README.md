@@ -77,6 +77,8 @@ unregisterRoutes();
 * [`evaluate(pathname, state, type, routes)`](#evaluate)
 * [`navigate(path, options)`](#navigate)
 
+---
+
 ####  `registerRoutes`
 
 Registers paths to their callbacks.
@@ -126,6 +128,7 @@ vise-versa.
 
 Common callback invoked at the end of any matching route's callback.
 
+---
 
 #### `evaluate`
 
@@ -167,6 +170,7 @@ Navigation type used to differentiate between imperative navigation and browser 
 
 Map of paths to route definitions or callbacks.
 
+---
 
 #### `navigate`
 
